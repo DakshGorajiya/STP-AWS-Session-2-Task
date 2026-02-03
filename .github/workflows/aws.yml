@@ -30,4 +30,10 @@ jobs:
         
     - name: Sync to S3 run
       run: |
-          aws s3 sync . s3://${{ env.S3_BUCKET }}/ --region ${{ env.AWS_REGION }} --delete --acl public-read
+          aws s3 sync . s3://${{ env.S3_BUCKET }}/
+          --region ${{ env.AWS_REGION }}
+          --delete
+          --exclude ".git/"
+          --exclude ".github/"
+          --exclude ".gitignore"
+          --exclude "README.md"
