@@ -28,7 +28,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
         
-    - name: Copy single file
+    - name: Sync to S3 run
       run: |
-          aws s3 cp . s3://${{ env.S3_BUCKET }}/ --recursive --exclude "*" --include "*.html"
-          echo "Deployment done"
+          aws s3 sync . s3://${{ env.S3_BUCKET }}/ --region ${{ env.AWS_REGION }} --delete --acl public-read
